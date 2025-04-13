@@ -1,1 +1,2 @@
-// Flows will be imported for their side effects in this file.
+import '@/ai/flows/energy-loss-prediction.ts';
+import '@/ai/flows/solar-panel-damage-detection.ts';
