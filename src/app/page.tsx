@@ -3,17 +3,19 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Mail, Phone } from "lucide-react";
+import { Mail, Phone, Upload } from "lucide-react";
 import { SolarPanelDamageDetectionForm } from "@/components/solar-panel-damage-detection-form";
 import { EnergyLossPrediction } from "@/components/energy-loss-prediction";
 import { SolarPanelPositionOptimization } from "@/components/solar-panel-position-optimization";
 import { Chatbot } from "@/components/chatbot";
 import { useToast } from "@/hooks/use-toast";
+import { Input } from "@/components/ui/input";
 
 const Home = () => {
   const [showDemo, setShowDemo] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const { toast } = useToast();
+  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
 
   useEffect(() => {
     setIsClient(true);
@@ -24,31 +26,65 @@ const Home = () => {
       toast({
         title: "Welcome to SolarisAI!",
         description:
-          "Maximize Your Solar Power with AI! Click on 'Try the Demo' to get started.",
+          "Maximize Your Solar Power with AI!",
       });
       setShowDemo(true);
     }
   }, [toast, showDemo]);
 
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setUploadedImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
-    <div className="container mx-auto p-4 bg-gradient-to-br from-background to-muted min-h-screen">
+    <div className="container mx-auto p-4 bg-background min-h-screen">
       {/* Hero Section */}
       <section className="text-center py-12">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-4xl font-bold mb-4">
-            Powering a Sustainable Future with AI-Driven Solar Solutions
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-5xl font-bold mb-6">
+            SolarisAI: Optimizing Solar Energy with AI
           </h1>
-          <p className="text-lg text-muted-foreground mb-8">
-            Unlock the full potential of your solar panels with our advanced AI platform.
-            We provide comprehensive analysis, predictive maintenance, and optimization strategies
-            to maximize energy efficiency and reduce costs.
+          <p className="text-xl text-muted-foreground mb-8">
+            Harness the power of artificial intelligence to maximize the efficiency
+            and longevity of your solar panels. From damage detection to position
+            optimization, SolarisAI provides comprehensive solutions for sustainable energy.
           </p>
           <div className="flex justify-center space-x-4">
             <Button variant="accent" onClick={() => alert("Demo Clicked")}>
               Try the Demo
             </Button>
-            <Button>Upload Image</Button>
+            <div className="relative">
+              <Input
+                type="file"
+                id="image-upload"
+                className="absolute w-full h-full opacity-0 cursor-pointer"
+                onChange={handleImageUpload}
+                accept="image/*"
+              />
+              <Button asChild>
+                <label htmlFor="image-upload" className="flex items-center space-x-2">
+                  <Upload className="h-5 w-5" />
+                  <span>Upload Image</span>
+                </label>
+              </Button>
+            </div>
           </div>
+          {uploadedImage && (
+            <div className="mt-6">
+              <img
+                src={uploadedImage}
+                alt="Uploaded Solar Panel"
+                className="max-w-md mx-auto rounded-md shadow-lg"
+              />
+            </div>
+          )}
         </div>
       </section>
 
@@ -58,7 +94,7 @@ const Home = () => {
           <CardHeader>
             <CardTitle>Solar Panel Damage Detection</CardTitle>
             <CardDescription>
-              Upload an image to detect dust, cracks, discoloration.
+              Detect cracks, dust, and discoloration using AI-powered image analysis.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -70,7 +106,7 @@ const Home = () => {
           <CardHeader>
             <CardTitle>Energy Loss Prediction</CardTitle>
             <CardDescription>
-              Show predicted percentage energy loss.
+              Predict energy loss percentage based on damage and dirt levels.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -82,7 +118,7 @@ const Home = () => {
           <CardHeader>
             <CardTitle>Solar Panel Position Optimization</CardTitle>
             <CardDescription>
-              Suggest ideal tilt using NASA data.
+              Optimize panel tilt for maximum energy gain using NASA data.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -92,20 +128,26 @@ const Home = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="text-center py-8">
-        <h2 className="text-3xl font-semibold mb-4">Contact Us</h2>
-        <p className="text-lg text-muted-foreground mb-4">
-          Get in touch with us for inquiries, support, and more information.
+      <section className="text-center py-12 bg-secondary rounded-md">
+        <h2 className="text-3xl font-semibold mb-4 text-secondary-foreground">Contact Us</h2>
+        <p className="text-lg text-muted-foreground mb-6">
+          Reach out for inquiries, support, and further information.
         </p>
         <div className="flex justify-center space-x-6">
           <div>
-            <a href="mailto:support@solarisai.com" className="flex items-center space-x-2 text-primary hover:underline">
+            <a
+              href="mailto:support@solarisai.com"
+              className="flex items-center space-x-3 text-secondary-foreground hover:underline"
+            >
               <Mail className="h-5 w-5" />
               <span>support@solarisai.com</span>
             </a>
           </div>
           <div>
-            <a href="tel:+15551234567" className="flex items-center space-x-2 text-primary hover:underline">
+            <a
+              href="tel:+15551234567"
+              className="flex items-center space-x-3 text-secondary-foreground hover:underline"
+            >
               <Phone className="h-5 w-5" />
               <span>+1 (555) 123-4567</span>
             </a>
@@ -119,5 +161,3 @@ const Home = () => {
 };
 
 export default Home;
-
-    
