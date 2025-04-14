@@ -52,12 +52,12 @@ const Home = () => {
            backgroundBlendMode: 'overlay',
          }}>
       {/* Hero Section */}
-      <section className="text-center py-12">
-        <div className="max-w-4xl mx-auto">
+      <section className="text-center py-16 glassmorphism-enhanced p-8 rounded-2xl">
+        <div className="max-w-4xl mx-auto glassmorphism-enhanced p-8 rounded-2xl">
           <h1 className="text-5xl font-bold mb-6">
             SolarisAI: Optimizing Solar Energy with AI
           </h1>
-          <p className="text-xl text-muted-foreground mb-8">
+          <p className="text-xl text-foreground mb-8">
             Unlock the full potential of your solar panels with SolarisAI. Our AI-powered platform provides advanced
             solutions for damage detection, energy loss prediction, and position optimization, ensuring maximum
             efficiency and sustainable energy production.
@@ -66,11 +66,10 @@ const Home = () => {
       </section>
 
       {/* Feature Highlights */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <Card className="glassmorphism" style={{backgroundColor: 'rgba(255, 255, 255, 0.3)',
-          backdropFilter: 'blur(7px)'}}>
-          <CardHeader>
-            <CardTitle>Solar Panel Damage Detection</CardTitle>
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <Card className="glassmorphism-enhanced card-hover border-t-4 border-yellow-400">
+          <CardHeader className="bg-gradient-to-r from-blue-500/10 to-blue-600/10 rounded-t-lg">
+            <CardTitle className="text-primary text-2xl">Solar Panel Damage Detection</CardTitle>
             <CardDescription>
               Detect cracks, dust, and discoloration using AI-powered image analysis.
             </CardDescription>
@@ -80,10 +79,9 @@ const Home = () => {
           </CardContent>
         </Card>
 
-        <Card className="glassmorphism" style={{backgroundColor: 'rgba(255, 255, 255, 0.3)',
-          backdropFilter: 'blur(7px)'}}>
-          <CardHeader>
-            <CardTitle>Energy Loss Prediction</CardTitle>
+        <Card className="glassmorphism-enhanced card-hover border-t-4 border-blue-400">
+          <CardHeader className="bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 rounded-t-lg">
+            <CardTitle className="text-secondary text-2xl">Energy Loss Prediction</CardTitle>
             <CardDescription>
               Predict energy loss percentage based on damage and dirt levels.
             </CardDescription>
@@ -93,10 +91,9 @@ const Home = () => {
           </CardContent>
         </Card>
 
-        <Card className="glassmorphism" style={{backgroundColor: 'rgba(255, 255, 255, 0.3)',
-          backdropFilter: 'blur(7px)'}}>
-          <CardHeader>
-            <CardTitle>Solar Panel Position Optimization</CardTitle>
+        <Card className="glassmorphism-enhanced card-hover border-t-4 border-orange-400">
+          <CardHeader className="bg-gradient-to-r from-green-500/10 to-green-600/10 rounded-t-lg">
+            <CardTitle className="text-accent text-2xl">Solar Panel Position Optimization</CardTitle>
             <CardDescription>
               Optimize panel tilt for maximum energy gain using NASA data.
             </CardDescription>
@@ -107,30 +104,24 @@ const Home = () => {
         </Card>
       </section>
 
-      {/* Contact Section */}
-      <section className="text-center py-12 bg-secondary rounded-md">
-        <h2 className="text-3xl font-semibold mb-4 text-secondary-foreground">Contact Us</h2>
-        <p className="text-lg text-muted-foreground mb-6">
-          Reach out for inquiries, support, and further information.
-        </p>
-        <div className="flex justify-center space-x-6">
-          <div>
-            <a
-              href="mailto:support@solarisai.com"
-              className="flex items-center space-x-3 text-secondary-foreground hover:underline"
-            >
-              <Mail className="h-5 w-5" />
-              <span>support@solarisai.com</span>
-            </a>
+      {/* Stats Section */}
+      <section className="mb-12 py-8 glassmorphism-enhanced">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
+          <div className="p-6">
+            <h3 className="text-4xl font-bold text-primary mb-2">98%</h3>
+            <p className="text-foreground/80">Accuracy in Damage Detection</p>
           </div>
-          <div>
-            <a
-              href="tel:+15551234567"
-              className="flex items-center space-x-3 text-secondary-foreground hover:underline"
-            >
-              <Phone className="h-5 w-5" />
-              <span>+1 (555) 123-4567</span>
-            </a>
+          <div className="p-6">
+            <h3 className="text-4xl font-bold text-secondary mb-2">30%</h3>
+            <p className="text-foreground/80">Average Efficiency Increase</p>
+          </div>
+          <div className="p-6">
+            <h3 className="text-4xl font-bold text-accent mb-2">1000+</h3>
+            <p className="text-foreground/80">Solar Systems Optimized</p>
+          </div>
+          <div className="p-6">
+            <h3 className="text-4xl font-bold text-green-500 mb-2">24/7</h3>
+            <p className="text-foreground/80">AI-Powered Monitoring</p>
           </div>
         </div>
       </section>
