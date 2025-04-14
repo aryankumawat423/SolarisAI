@@ -47,7 +47,7 @@ export const SolarPanelPositionOptimization = () => {
         }
       } catch (error) {
         console.error("Error saving position optimization result to database:", error);
-      }
+      } 
 
     } catch (error) {
       console.error("Error fetching NASA solar data:", error);
@@ -55,6 +55,8 @@ export const SolarPanelPositionOptimization = () => {
       setEnergyGain(null);
     } finally {
       setIsLoading(false);
+      setLatitude("");
+      setLongitude("");
     }
   };
 
@@ -91,7 +93,7 @@ export const SolarPanelPositionOptimization = () => {
               <strong>Optimal Tilt:</strong> {optimalTilt}°
             </p>
             <p>
-              <strong>Expected Energy Gain:</strong> {energyGain}
+              <strong>Expected Energy Gain:</strong> {energyGain * 100} %
             </p>
           </CardContent>
         </Card>

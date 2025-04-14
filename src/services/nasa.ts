@@ -1,3 +1,6 @@
+import { get } from "http";
+import { getTiltandEnergy } from "./langlong-response";
+
 /**
  * Represents the NASA solar data.
  */
@@ -23,10 +26,13 @@ export async function getNasaSolarData(
   latitude: number,
   longitude: number
 ): Promise<NasaSolarData> {
-  // TODO: Implement this by calling the NASA API.
+  const {tilt, energy} = getTiltandEnergy(latitude, longitude);
+  if(tilt === undefined || energy === undefined) {
+    throw new Error("Error retrieving solar data from API.");
+  }
 
   return {
-    optimalTilt: 30,
-    energyGain: 0.85,
+    optimalTilt: tilt,
+    energyGain: energy,
   };
 }
