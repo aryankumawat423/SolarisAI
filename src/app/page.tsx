@@ -64,7 +64,7 @@ const Home = () => {
             efficiency and sustainable energy production.
           </p>
           <div className="flex justify-center space-x-4">
-            <Button variant="accent" onClick={() => alert("Demo Clicked")}>
+            <Button variant="default" onClick={() => alert("Demo Clicked")}>
               Try the Demo
             </Button>
             <div className="relative">
@@ -165,7 +165,7 @@ const Home = () => {
         </div>
       </section>
 
-      {isClient && <Chatbot style={{position: 'fixed', bottom: '20px', right: '20px'}} />}
+      {isClient && <Chatbot/>}
     </div>
   );
 };
