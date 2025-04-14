@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -44,7 +45,13 @@ const Home = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 bg-background min-h-screen">
+    <div className="container mx-auto p-4 bg-background min-h-screen"
+         style={{
+           backgroundImage: 'url("https://images.unsplash.com/photo-1605296867304-46dcd258eb07?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")',
+           backgroundSize: 'cover',
+           backgroundPosition: 'center',
+           backgroundBlendMode: 'overlay',
+         }}>
       {/* Hero Section */}
       <section className="text-center py-12">
         <div className="max-w-4xl mx-auto">
@@ -52,9 +59,9 @@ const Home = () => {
             SolarisAI: Optimizing Solar Energy with AI
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
-            Harness the power of artificial intelligence to maximize the efficiency
-            and longevity of your solar panels. From damage detection to position
-            optimization, SolarisAI provides comprehensive solutions for sustainable energy.
+            Unlock the full potential of your solar panels with SolarisAI. Our AI-powered platform provides advanced
+            solutions for damage detection, energy loss prediction, and position optimization, ensuring maximum
+            efficiency and sustainable energy production.
           </p>
           <div className="flex justify-center space-x-4">
             <Button variant="accent" onClick={() => alert("Demo Clicked")}>
@@ -90,7 +97,8 @@ const Home = () => {
 
       {/* Feature Highlights */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <Card className="glassmorphism">
+        <Card className="glassmorphism" style={{backgroundColor: 'rgba(255, 255, 255, 0.3)',
+          backdropFilter: 'blur(7px)'}}>
           <CardHeader>
             <CardTitle>Solar Panel Damage Detection</CardTitle>
             <CardDescription>
@@ -102,7 +110,8 @@ const Home = () => {
           </CardContent>
         </Card>
 
-        <Card className="glassmorphism">
+        <Card className="glassmorphism" style={{backgroundColor: 'rgba(255, 255, 255, 0.3)',
+          backdropFilter: 'blur(7px)'}}>
           <CardHeader>
             <CardTitle>Energy Loss Prediction</CardTitle>
             <CardDescription>
@@ -114,7 +123,8 @@ const Home = () => {
           </CardContent>
         </Card>
 
-        <Card className="glassmorphism">
+        <Card className="glassmorphism" style={{backgroundColor: 'rgba(255, 255, 255, 0.3)',
+          backdropFilter: 'blur(7px)'}}>
           <CardHeader>
             <CardTitle>Solar Panel Position Optimization</CardTitle>
             <CardDescription>
@@ -155,7 +165,7 @@ const Home = () => {
         </div>
       </section>
 
-      {isClient && <Chatbot />}
+      {isClient && <Chatbot style={{position: 'fixed', bottom: '20px', right: '20px'}} />}
     </div>
   );
 };
