@@ -52,9 +52,9 @@ const Home = () => {
            backgroundBlendMode: 'overlay',
          }}>
       {/* Hero Section */}
-      <section className="text-center py-16 glassmorphism-enhanced p-8 rounded-2xl">
+      <section className="text-center py-16 glassmorphism-enhanced p-8 rounded-2xl mb-16">
         <div className="max-w-4xl mx-auto glassmorphism-enhanced p-8 rounded-2xl">
-          <h1 className="text-5xl font-bold mb-6">
+          <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text">
             SolarisAI: Optimizing Solar Energy with AI
           </h1>
           <p className="text-xl text-foreground mb-8">
@@ -64,69 +64,131 @@ const Home = () => {
           </p>
         </div>
       </section>
+      <section id="about" className="mb-20 glassmorphism-enhanced p-10 rounded-2xl">
+        <h2 className="text-4xl font-semibold mb-8 text-center bg-gradient-to-r from-green-400 to-teal-500 text-transparent bg-clip-text">About SolarisAI</h2>
+        <p className="text-lg mb-8">
+          SolarisAI is an innovative platform that leverages artificial intelligence to optimize solar energy systems.
+          Our mission is to make solar energy more efficient, accessible, and manageable for everyone.
+        </p>
+        
+        <h3 className="text-3xl font-semibold mb-6 mt-10 text-amber-500">Our Features</h3>
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="bg-white/5 p-6 rounded-lg shadow-md">
+            <h4 className="text-xl font-medium mb-3 text-primary">Solar Panel Damage Detection</h4>
+            <p>
+              Our AI-powered system can analyze images of solar panels to detect damages, cracks, or defects.
+              This helps in early identification of issues, preventing energy loss and extending the lifespan of your solar panels.
+            </p>
+          </div>
+          
+          <div className="bg-white/5 p-6 rounded-lg shadow-md">
+            <h4 className="text-xl font-medium mb-3 text-secondary">Energy Loss Prediction</h4>
+            <p>
+              Using historical data and machine learning algorithms, SolarisAI can predict potential energy losses
+              and suggest preventive measures to maintain optimal performance of your solar energy system.
+            </p>
+          </div>
+          
+          <div className="bg-white/5 p-6 rounded-lg shadow-md">
+            <h4 className="text-xl font-medium mb-3 text-accent">Solar Panel Position Optimization</h4>
+            <p>
+              Our advanced algorithms calculate the optimal positioning of solar panels based on your location,
+              weather patterns, and surrounding environment to maximize energy generation throughout the year.
+            </p>
+          </div>
+          
+          <div className="bg-white/5 p-6 rounded-lg shadow-md">
+            <h4 className="text-xl font-medium mb-3 text-green-500">AI Chatbot Support</h4>
+            <p>
+              Get instant answers to your questions about solar panel maintenance, performance optimization,
+              and troubleshooting through our intelligent chatbot available 24/7.
+            </p>
+          </div>
+        </div>
+        
+        <h3 className="text-3xl font-semibold mb-6 mt-10 text-cyan-500">Our Technology</h3>
+        <p className="text-lg mb-4">
+          SolarisAI combines cutting-edge technologies including:
+        </p>
+        <ul className="list-disc pl-6 space-y-2 mb-4">
+          <li>Computer vision for damage detection</li>
+          <li>Machine learning for performance prediction</li>
+          <li>Geospatial analysis for optimal positioning</li>
+          <li>Natural language processing for our interactive chatbot</li>
+          <li>Real-time data processing for accurate insights</li>
+        </ul>
+      </section>
+
 
       {/* Feature Highlights */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-        <Card className="glassmorphism-enhanced card-hover border-t-4 border-yellow-400">
-          <CardHeader className="bg-gradient-to-r from-blue-500/10 to-blue-600/10 rounded-t-lg">
-            <CardTitle className="text-primary text-2xl">Solar Panel Damage Detection</CardTitle>
-            <CardDescription>
-              Detect cracks, dust, and discoloration using AI-powered image analysis.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <SolarPanelDamageDetectionForm />
-          </CardContent>
-        </Card>
+      <section className="mt-16 mb-20">
+        <h2 className="text-4xl font-semibold mb-10 text-center bg-gradient-to-r from-indigo-500 to-purple-500 text-transparent bg-clip-text">Our Solutions</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <Card className="glassmorphism-enhanced card-hover border-t-4 border-yellow-400">
+            <CardHeader className="bg-gradient-to-r from-blue-500/10 to-blue-600/10 rounded-t-lg">
+              <CardTitle className="text-primary text-2xl">Solar Panel Damage Detection</CardTitle>
+              <CardDescription>
+                Detect cracks, dust, and discoloration using AI-powered image analysis.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <SolarPanelDamageDetectionForm />
+            </CardContent>
+          </Card>
 
-        <Card className="glassmorphism-enhanced card-hover border-t-4 border-blue-400">
-          <CardHeader className="bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 rounded-t-lg">
-            <CardTitle className="text-secondary text-2xl">Energy Loss Prediction</CardTitle>
-            <CardDescription>
-              Predict energy loss percentage based on damage and dirt levels.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <EnergyLossPrediction />
-          </CardContent>
-        </Card>
+          <Card className="glassmorphism-enhanced card-hover border-t-4 border-blue-400">
+            <CardHeader className="bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 rounded-t-lg">
+              <CardTitle className="text-secondary text-2xl">Energy Loss Prediction</CardTitle>
+              <CardDescription>
+                Predict energy loss percentage based on damage and dirt levels.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <EnergyLossPrediction />
+            </CardContent>
+          </Card>
 
-        <Card className="glassmorphism-enhanced card-hover border-t-4 border-orange-400">
-          <CardHeader className="bg-gradient-to-r from-green-500/10 to-green-600/10 rounded-t-lg">
-            <CardTitle className="text-accent text-2xl">Solar Panel Position Optimization</CardTitle>
-            <CardDescription>
-              Optimize panel tilt for maximum energy gain using NASA data.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <SolarPanelPositionOptimization />
-          </CardContent>
-        </Card>
+          <Card className="glassmorphism-enhanced card-hover border-t-4 border-orange-400">
+            <CardHeader className="bg-gradient-to-r from-green-500/10 to-green-600/10 rounded-t-lg">
+              <CardTitle className="text-accent text-2xl">Solar Panel Position Optimization</CardTitle>
+              <CardDescription>
+                Optimize panel tilt for maximum energy gain using NASA data.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <SolarPanelPositionOptimization />
+            </CardContent>
+          </Card>
+        </div>
       </section>
 
       {/* Stats Section */}
-      <section className="mb-12 py-8 glassmorphism-enhanced">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
-          <div className="p-6">
-            <h3 className="text-4xl font-bold text-primary mb-2">98%</h3>
-            <p className="text-foreground/80">Accuracy in Damage Detection</p>
+      <section className="mb-20 py-12 glassmorphism-enhanced rounded-2xl">
+        <h2 className="text-4xl font-semibold mb-10 text-center bg-gradient-to-r from-rose-500 to-pink-500 text-transparent bg-clip-text">Our Impact</h2>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
+          <div className="p-8">
+            <h3 className="text-5xl font-bold text-primary mb-3">98%</h3>
+            <p className="text-foreground/80 text-lg">Accuracy in Damage Detection</p>
           </div>
-          <div className="p-6">
-            <h3 className="text-4xl font-bold text-secondary mb-2">30%</h3>
-            <p className="text-foreground/80">Average Efficiency Increase</p>
+          <div className="p-8">
+            <h3 className="text-5xl font-bold text-secondary mb-3">30%</h3>
+            <p className="text-foreground/80 text-lg">Average Efficiency Increase</p>
           </div>
-          <div className="p-6">
-            <h3 className="text-4xl font-bold text-accent mb-2">1000+</h3>
-            <p className="text-foreground/80">Solar Systems Optimized</p>
+          <div className="p-8">
+            <h3 className="text-5xl font-bold text-accent mb-3">1000+</h3>
+            <p className="text-foreground/80 text-lg">Solar Systems Optimized</p>
           </div>
-          <div className="p-6">
-            <h3 className="text-4xl font-bold text-green-500 mb-2">24/7</h3>
-            <p className="text-foreground/80">AI-Powered Monitoring</p>
+          <div className="p-8">
+            <h3 className="text-5xl font-bold text-green-500 mb-3">24/7</h3>
+            <p className="text-foreground/80 text-lg">AI-Powered Monitoring</p>
           </div>
         </div>
       </section>
 
-      {isClient && <Chatbot/>}
+    
+      <section className="mt-16 mb-10">
+        {isClient && <Chatbot/>}
+      </section>
     </div>
   );
 };
