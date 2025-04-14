@@ -12,7 +12,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-
+import { chatbot, ChatbotInput } from "@/ai/flows/chatbot-flow";
 
 export const Chatbot = () => {
   const [messages, setMessages] = useState([
@@ -22,18 +22,32 @@ export const Chatbot = () => {
     },
   ]);
   const [newMessage, setNewMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (newMessage.trim() !== "") {
-      setMessages([
-        ...messages,
-        { text: newMessage, sender: "user" },
-        {
-          text: "This is a dummy response. Please implement the backend logic to provide meaningful answers.",
-          sender: "ai",
-        },
-      ]);
+      setIsLoading(true);
+      setMessages([...messages, { text: newMessage, sender: "user" }]); // Optimistic update
       setNewMessage("");
+      try {
+        const input: ChatbotInput = { message: newMessage };
+        const result = await chatbot(input);
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { text: result.response, sender: "ai" },
+        ]);
+      } catch (error) {
+        console.error("Error getting chatbot response:", error);
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          {
+            text: "Sorry, I encountered an error. Please try again.",
+            sender: "ai",
+          },
+        ]);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -74,12 +88,15 @@ export const Chatbot = () => {
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
               onKeyDown={(e) => {
-                if (e.key === "Enter") {
+                if (e.key === "Enter" && !isLoading) {
                   handleSendMessage();
                 }
               }}
+              disabled={isLoading}
             />
-            <Button onClick={handleSendMessage}>Send</Button>
+            <Button onClick={handleSendMessage} disabled={isLoading}>
+              {isLoading ? "Sending..." : "Send"}
+            </Button>
           </div>
         </DialogContent>
       </Dialog>
