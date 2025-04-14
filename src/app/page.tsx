@@ -1,29 +1,36 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Mail, Phone, Upload } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import { SolarPanelDamageDetectionForm } from "@/components/solar-panel-damage-detection-form";
 import { EnergyLossPrediction } from "@/components/energy-loss-prediction";
 import { SolarPanelPositionOptimization } from "@/components/solar-panel-position-optimization";
 import { Chatbot } from "@/components/chatbot";
 import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
+import { useRouter } from 'next/navigation';
+import { useAuth } from "@/contexts/AuthContext"; // Import the AuthContext
+
 
 const Home = () => {
   const [showDemo, setShowDemo] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const { toast } = useToast();
-  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const router = useRouter();
+  const { currentUser } = useAuth();
+
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
   useEffect(() => {
-    if (!showDemo) {
+    if (currentUser) {
+      router.push('/login');
+    }
+    else if (!showDemo) {
       toast({
         title: "Welcome to SolarisAI!",
         description:
@@ -31,18 +38,10 @@ const Home = () => {
       });
       setShowDemo(true);
     }
-  }, [toast, showDemo]);
+  }, [toast, showDemo, router, currentUser]);
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setUploadedImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+
+
 
   return (
     <div className="container mx-auto p-4 bg-background min-h-screen"
@@ -63,35 +62,6 @@ const Home = () => {
             solutions for damage detection, energy loss prediction, and position optimization, ensuring maximum
             efficiency and sustainable energy production.
           </p>
-          <div className="flex justify-center space-x-4">
-            <Button variant="default" onClick={() => alert("Demo Clicked")}>
-              Try the Demo
-            </Button>
-            <div className="relative">
-              <Input
-                type="file"
-                id="image-upload"
-                className="absolute w-full h-full opacity-0 cursor-pointer"
-                onChange={handleImageUpload}
-                accept="image/*"
-              />
-              <Button asChild>
-                <label htmlFor="image-upload" className="flex items-center space-x-2">
-                  <Upload className="h-5 w-5" />
-                  <span>Upload Image</span>
-                </label>
-              </Button>
-            </div>
-          </div>
-          {uploadedImage && (
-            <div className="mt-6">
-              <img
-                src={uploadedImage}
-                alt="Uploaded Solar Panel"
-                className="max-w-md mx-auto rounded-md shadow-lg"
-              />
-            </div>
-          )}
         </div>
       </section>
 

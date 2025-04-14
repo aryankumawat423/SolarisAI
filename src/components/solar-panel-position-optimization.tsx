@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { getNasaSolarData } from "@/services/nasa";
+import { saveResult } from "../mongodb/db-utils";
 
 export const SolarPanelPositionOptimization = () => {
   const [latitude, setLatitude] = useState("");
@@ -29,6 +30,25 @@ export const SolarPanelPositionOptimization = () => {
       );
       setOptimalTilt(result.optimalTilt);
       setEnergyGain(result.energyGain);
+      try {
+        const saveResultResponse = await saveResult(
+          "positionOptimizationResults",
+          {
+            latitude: parseFloat(latitude),
+            longitude: parseFloat(longitude),
+            optimalTilt: result.optimalTilt,
+            energyGain: result.energyGain,
+          }
+        );
+        if (saveResultResponse) {
+          console.log("Position optimization result saved to database with ID:", saveResultResponse);
+        } else {
+          console.error("Failed to save position optimization result to database.");
+        }
+      } catch (error) {
+        console.error("Error saving position optimization result to database:", error);
+      }
+
     } catch (error) {
       console.error("Error fetching NASA solar data:", error);
       setOptimalTilt(null);

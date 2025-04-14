@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { solarPanelDamageDetection } from "@/ai/flows/solar-panel-damage-detection";
 import { Upload } from "lucide-react";
+import { saveResult } from "../mongodb/db-utils";
 
 export const SolarPanelDamageDetectionForm = () => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
@@ -49,6 +50,24 @@ export const SolarPanelDamageDetectionForm = () => {
         setDamageType(result.damageType);
         setSuggestedAction(result.suggestedAction);
         setEnergyLossPercentage(result.energyLossPercentage || null);
+        try {
+          const saveResultResponse = await saveResult(
+            "damageDetectionResults",
+            {
+              photoUrl: base64String,
+              damageType: result.damageType,
+              suggestedAction: result.suggestedAction,
+              energyLossPercentage: result.energyLossPercentage,
+            }
+          );
+          if (saveResultResponse) {
+            console.log("Damage detection result saved to database with ID:", saveResultResponse);
+          } else {
+            console.error("Failed to save damage detection result to database.");
+          }
+        } catch (error) {
+          console.error("Error saving damage detection result to database:", error);
+        }
       };
       reader.readAsDataURL(selectedImage);
 

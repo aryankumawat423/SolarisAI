@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { predictEnergyLoss } from "@/ai/flows/energy-loss-prediction";
+import { saveResult } from "../mongodb/db-utils";
 
 export const EnergyLossPrediction = () => {
   const [damageDescription, setDamageDescription] = useState("");
@@ -26,6 +27,24 @@ export const EnergyLossPrediction = () => {
       const result = await predictEnergyLoss({ damageDescription, dirtLevel });
       setPredictedLoss(result.energyLossPercentage);
       setSuggestedAction(result.suggestedAction);
+      try {
+        const saveResultResponse = await saveResult(
+          "energyLossPredictions",
+          {
+            damageDescription,
+            dirtLevel,
+            energyLossPercentage: result.energyLossPercentage,
+            suggestedAction: result.suggestedAction,
+          }
+        );
+        if (saveResultResponse) {
+          console.log("Energy loss prediction saved to database with ID:", saveResultResponse);
+        } else {
+          console.error("Failed to save energy loss prediction to database.");
+        }
+      } catch (error) {
+        console.error("Error saving energy loss prediction to database:", error);
+      }
     } catch (error) {
       console.error("Error predicting energy loss:", error);
       setPredictedLoss(null);
