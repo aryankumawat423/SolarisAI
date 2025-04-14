@@ -1,0 +1,1 @@
+Direct database connection is not supported within this environment.  Please set up a proper backend environment with API endpoints for database interaction.
